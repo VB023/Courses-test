@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes courses de la semaine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0b6b5b">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Mes courses de la semaine</h1>
+  <p class="sub">Chargement des recettes…</p>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab" id="t-r" role="tab" aria-selected="true" aria-controls="v-r">Recettes</button>
+  <button class="tab" id="t-l" role="tab" aria-selected="false" aria-controls="v-l">Ma liste <span class="badge" id="nbsel">0</span></button>
+</div>
+
+<section id="v-r" role="tabpanel" aria-labelledby="t-r">
+  <div class="filters">
+    <input class="search" id="q" type="search" placeholder="Chercher un plat ou un ingrédient…" aria-label="Chercher">
+    <div class="chips" id="f-type" role="group" aria-label="Type de plat">
+      <button class="chip" data-v="" aria-pressed="true">Tout</button>
+      <button class="chip" data-v="Végé" aria-pressed="false">Végé</button>
+      <button class="chip" data-v="Viande" aria-pressed="false">Viande</button>
+      <button class="chip" data-v="Poisson" aria-pressed="false">Poisson</button>
+    </div>
+    <div class="chips" id="f-time" role="group" aria-label="Temps maximum">
+      <button class="chip" data-v="20" aria-pressed="false">≤ 20 min</button>
+      <button class="chip" data-v="30" aria-pressed="false">≤ 30 min</button>
+      <button class="chip" data-v="45" aria-pressed="false">≤ 45 min</button>
+      <button class="chip" data-v="" aria-pressed="true">Sans limite</button>
+    </div>
+    <div class="chips">
+      <button class="chip" id="f-new" aria-pressed="false">Nouveautés</button>
+      <button class="chip" id="f-sel" aria-pressed="false">Ma sélection</button>
+      <button class="chip" id="f-sort" aria-pressed="true">Trier par temps</button>
+    </div>
+  </div>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="v-l" role="tabpanel" aria-labelledby="t-l" class="hide">
+  <div class="tiles">
+    <div class="tile"><b id="k1">0</b><span>repas</span></div>
+    <div class="tile"><b id="k2">0</b><span>couverts</span></div>
+    <div class="tile"><b id="k3">0</b><span>min de cuisine</span></div>
+    <div class="tile"><b id="k4">0</b><span>lignes à acheter</span></div>
+  </div>
+  <div id="plan"></div>
+  <div id="list"></div>
+  <div class="actions" id="acts"></div>
+  <p class="foot">Les quantités par personne sont des ordres de grandeur, à ajuster après les
+  premières courses. Mêmes recettes et mêmes quantités que le classeur Excel.</p>
+</section>
+</div>
+
+<script src="./assets/app.js" defer></script>
+</body>
+</html>
