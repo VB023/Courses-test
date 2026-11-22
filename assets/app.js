@@ -3,7 +3,7 @@ const KEY = "courses-selection-v1";
 let sel = {};                                  // nom de recette -> nb de personnes
 let done = {};                                 // ingrédient -> coché
 let open = {};                                 // fiche dépliée
-let F = {type:"", time:"", neuf:false, mine:false, tri:"temps", q:""};
+let F = {moment:"", type:"", time:"", neuf:false, mine:false, tri:"temps", q:""};
 
 try{ const s = JSON.parse(localStorage.getItem(KEY)||"{}");
      sel = s.sel||{}; done = s.done||{}; }catch(e){}
@@ -12,10 +12,13 @@ function save(){ try{ localStorage.setItem(KEY, JSON.stringify({sel,done})); }ca
 const nf = new Intl.NumberFormat("fr-FR",{maximumFractionDigits:2});
 const byName = {};
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const MOMENTS = ["Apéro","Entrée","Plat","Dessert"];
+const momentRang = r => { const i = MOMENTS.indexOf(r?.m||"Plat"); return i<0?2:i; };
 const dotCls = t => t==="Végé"?"v":(t==="Viande"?"m":"p");
 
 function visibles(){
   let out = RECS.filter(r=>{
+    if(F.moment && (r.m||"Plat")!==F.moment) return false;
     if(F.type && r.ty!==F.type) return false;
     if(F.time && r.tt>+F.time) return false;
     if(F.neuf && !r.new) return false;
@@ -48,6 +51,7 @@ function renderGrid(){
          <span class="pill">${r.ta} min actif</span>
          <span class="pill"><i class="dot ${dotCls(r.ty)}"></i>${r.ty}</span>
          <span class="pill">${r.d}</span>
+         <span class="pill moment">${r.m||"Plat"}</span>
          <span class="pill">${r.cat}</span>
          <span class="pill">${r.ing.length} ingrédients</span>
          ${r.new?'<span class="pill new">nouveau</span>':''}
@@ -92,10 +96,10 @@ function renderListe(){
     return;
   }
   plan.innerHTML = "<h2>Mes repas</h2><div class='plan'>" + noms
-    .sort((a,b)=>a.localeCompare(b,"fr"))
+    .sort((a,b)=>momentRang(byName[a])-momentRang(byName[b]) || a.localeCompare(b,"fr"))
     .map(n=>{ const r=byName[n];
       return `<div class="card"><div class="nm"><b>${n}</b>
-        <span>⏱ ${r.tt} min · ${r.ty} · ${r.cat}</span></div>
+        <span>${r.m||"Plat"} · ⏱ ${r.tt} min · ${r.ty} · ${r.cat}</span></div>
         <div class="stepper"><button data-m="${n}">−</button><span>${sel[n]} pers.</span>
         <button data-p="${n}">+</button></div>
         <button class="btn" data-x="${n}" aria-label="Retirer ${n}">✕</button></div>`;
@@ -152,6 +156,8 @@ document.addEventListener("click", e=>{
     document.getElementById("v-r").classList.toggle("hide",!r);
     document.getElementById("v-l").classList.toggle("hide",r);
     window.scrollTo({top:0}); }
+  else if(t.closest("#f-moment")){ F.moment=d.v;
+    [...t.parentElement.children].forEach(c=>c.setAttribute("aria-pressed",c===t)); renderGrid(); }
   else if(t.closest("#f-type")){ F.type=d.v;
     [...t.parentElement.children].forEach(c=>c.setAttribute("aria-pressed",c===t)); renderGrid(); }
   else if(t.closest("#f-time")){ F.time=d.v;

@@ -72,6 +72,7 @@ Tout est dans `data/recettes.json` :
       "d": "Moyen",              // Facile | Moyen | Soutenu
       "ty": "Végé",              // Végé | Viande | Poisson
       "new": false,              // affiche la pastille « nouveau »
+      "m": "Plat",               // Apéro | Entrée | Plat | Dessert (absent = Plat)
       "ing": [ { "n": "Pâtes", "q": 100 } ]   // nom d'ingrédient, quantité PAR PERSONNE
     }
   ]
