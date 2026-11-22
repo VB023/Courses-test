@@ -45,6 +45,10 @@ h1{font-family:var(--display);font-size:26px;font-weight:700;margin:0;letter-spa
 .filters{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
 .search{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;
   background:var(--card);color:var(--ink);font:400 15px var(--body)}
+.frow{display:flex;align-items:flex-start;gap:10px}
+.flab{flex:0 0 58px;padding-top:7px;font-size:12px;font-weight:700;color:var(--ink-soft);
+  text-transform:uppercase;letter-spacing:.04em}
+.frow .chips{flex:1}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
   font:500 13px var(--body);padding:6px 12px;border-radius:999px;cursor:pointer}

@@ -1,7 +1,7 @@
 /* Service worker : rend l'application utilisable sans réseau (utile en magasin).
    À chaque mise à jour du site, incrémenter VERSION — sinon le navigateur
    continue de servir l'ancienne version depuis son cache. */
-const VERSION = "courses-v2";
+const VERSION = "courses-v3";
 const SHELL = [
   "./",
   "./index.html",
