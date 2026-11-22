@@ -28,6 +28,13 @@
 <section id="v-r" role="tabpanel" aria-labelledby="t-r">
   <div class="filters">
     <input class="search" id="q" type="search" placeholder="Chercher un plat ou un ingrédient…" aria-label="Chercher">
+    <div class="chips" id="f-moment" role="group" aria-label="Moment du repas">
+      <button class="chip" data-v="" aria-pressed="true">Tous moments</button>
+      <button class="chip" data-v="Apéro" aria-pressed="false">Apéro</button>
+      <button class="chip" data-v="Entrée" aria-pressed="false">Entrée</button>
+      <button class="chip" data-v="Plat" aria-pressed="false">Plat</button>
+      <button class="chip" data-v="Dessert" aria-pressed="false">Dessert</button>
+    </div>
     <div class="chips" id="f-type" role="group" aria-label="Type de plat">
       <button class="chip" data-v="" aria-pressed="true">Tout</button>
       <button class="chip" data-v="Végé" aria-pressed="false">Végé</button>
